@@ -131,6 +131,13 @@
         "com.unity.shadergraph": "12.1.8"
       }
     },
+    "com.unity.save-system": {
+      "version": "https://github.com/Farid357/Save-System.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "537003f0e454fc0f8fb316061df049c981dd416a"
+    },
     "com.unity.searcher": {
       "version": "4.9.1",
       "depth": 2,
