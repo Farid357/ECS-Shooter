@@ -1,6 +1,5 @@
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine;
 
 namespace Shooter.Gameplay
 {
@@ -10,9 +9,8 @@ namespace Shooter.Gameplay
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct WeaponComponent : IComponent
     {
-        public GeneralWeaponType GeneralType;
-        public ConcreteWeaponType ConcreteType;
-        public Transform BulletSpawnPoint;
+        public IBulletFactory BulletFactory;
+        public bool IsBurst;
         public bool IsSelected;
     }
 }

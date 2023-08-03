@@ -462,7 +462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.046229165, y: 0.95933336}
   m_AnchorMax: {x: 0.046229165, y: 0.95933336}
-  m_AnchoredPosition: {x: -59.900024, y: 27.5}
+  m_AnchoredPosition: {x: -59.899902, y: 27.5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &703415953
@@ -692,7 +692,6 @@ MonoBehaviour:
   _weaponPrefab: {fileID: 5258693328102069213, guid: 3f43a9c20d605da49979b66a5273f3df,
     type: 3}
   _spawnPoint: {fileID: 574656470}
-  _bulletFactory: {fileID: 768530456}
 --- !u!4 &768530455
 Transform:
   m_ObjectHideFlags: 0
@@ -721,6 +720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 2755999992106188316, guid: 663e208b69662204b81a0e7c76878619, type: 3}
+  _spawnPoint: {fileID: 0}
 --- !u!1 &847170515
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,8 +731,10 @@ GameObject:
   m_Component:
   - component: {fileID: 847170518}
   - component: {fileID: 847170517}
-  - component: {fileID: 847170516}
   - component: {fileID: 847170519}
+  - component: {fileID: 847170522}
+  - component: {fileID: 847170521}
+  - component: {fileID: 847170520}
   m_Layer: 0
   m_Name: Core
   m_TagString: Untagged
@@ -740,20 +742,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &847170516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 847170515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6583c77a79d54a738f48230319dc970a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startWeaponFactory: {fileID: 768530454}
-  _enemyFactory: {fileID: 1312405530}
 --- !u!114 &847170517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -768,7 +756,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
-  - {fileID: 847170516}
+  - {fileID: 847170521}
+  - {fileID: 847170522}
+  - {fileID: 847170520}
   - {fileID: 847170519}
   _installerPrefabs: []
   _autoRun: 1
@@ -819,6 +809,44 @@ MonoBehaviour:
   _scoreView: {fileID: 703415955}
   _recordView: {fileID: 991017414}
   _walletView: {fileID: 1251746921}
+--- !u!114 &847170520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847170515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a2ed7c1b8d4848a2d7c5d38589d366, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyFactory: {fileID: 1312405530}
+--- !u!114 &847170521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847170515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a976a50954107c4abdcf6a1d13c5482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &847170522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847170515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ff49334f9542a99b7d34fd11040e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponFactory: {fileID: 768530454}
 --- !u!1 &874605735
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,7 +1184,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.04147917, y: 0.8794445}
   m_AnchorMax: {x: 0.04147917, y: 0.8794445}
-  m_AnchoredPosition: {x: -50.900024, y: 56.200012}
+  m_AnchoredPosition: {x: -50.899902, y: 56.19995}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &991017414
@@ -1370,7 +1398,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.04147917, y: 0.8794445}
   m_AnchorMax: {x: 0.04147917, y: 0.8794445}
-  m_AnchoredPosition: {x: -50.900024, y: 5}
+  m_AnchoredPosition: {x: -50.899902, y: 5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1251746921

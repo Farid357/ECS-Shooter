@@ -1,29 +1,44 @@
 using System;
 using Scellecs.Morpeh;
 using Shooter.Gameplay;
+using UnityEngine;
 using Zenject;
 
 namespace Shooter.Core
 {
-    public class WeaponInstaller : Installer<WeaponFactory, SystemsGroup, WeaponInstaller>
+    public class WeaponInstaller : MonoInstaller
     {
-        private readonly WeaponFactory _weaponFactory;
-        private readonly SystemsGroup _systemsGroup;
+        [SerializeField] private WeaponFactory _weaponFactory;
+        
+        private IGameLoop _gameLoop;
 
-        public WeaponInstaller(WeaponFactory weaponFactory, SystemsGroup systemsGroup)
+        [Inject]
+        public void Initialize(IGameLoop gameLoop)
         {
-            _weaponFactory = weaponFactory ?? throw new ArgumentNullException(nameof(weaponFactory));
-            _systemsGroup = systemsGroup ?? throw new ArgumentNullException(nameof(systemsGroup));
+            _gameLoop = gameLoop ?? throw new ArgumentNullException(nameof(gameLoop));
         }
-
+        
         public override void InstallBindings()
         {
+            IWeaponry weaponry = new Weaponry();
             ICharacterShootingInput shootingInput = new CharacterShootingInput();
+
+            Container.BindInstance(shootingInput).AsSingle();
+            Container.BindInstance(weaponry).AsSingle();
+            
             Entity entity = _weaponFactory.Create();
             ref WeaponComponent weaponComponent = ref entity.GetComponent<WeaponComponent>();
+            ref WeaponTypeComponent typeComponent = ref entity.GetComponent<WeaponTypeComponent>();
+            ref ClipComponent clipComponent = ref entity.GetComponent<ClipComponent>();
+            
             weaponComponent.IsSelected = true;
-
-            _systemsGroup.AddSystem(new CharacterShootingSystem(_weaponFactory.BulletFactory, shootingInput, true));
+            weaponry.Add(clipComponent.MaxBullets, typeComponent.GeneralType);
+            
+            ISystem shootingSystem = Container.Instantiate<CharacterShootingSystem>();
+            ISystem reloadingSystem = Container.Instantiate<CharacterReloadingSystem>();
+            
+            _gameLoop.AddSystem(shootingSystem);
+            _gameLoop.AddSystem(reloadingSystem);
         }
     }
 }

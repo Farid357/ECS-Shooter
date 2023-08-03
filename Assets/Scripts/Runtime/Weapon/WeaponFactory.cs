@@ -7,9 +7,6 @@ namespace Shooter.Gameplay
     {
         [SerializeField] private WeaponProvider _weaponPrefab;
         [SerializeField] private Transform _spawnPoint;
-        [SerializeField] private BulletFactory _bulletFactory;
-     
-        public IBulletFactory BulletFactory => _bulletFactory;
 
         public Entity Create()
         {

@@ -6,17 +6,19 @@ namespace Shooter.Gameplay
     {
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private float _throwForce;
-        
-        private int _damage;
 
-        public void Initialize(int damage)
+        private int _damage;
+        private Vector3 _direction;
+
+        public void Initialize(int damage, Vector3 direction)
         {
+            _direction = direction;
             _damage = damage;
         }
-        
-        public void Throw(Vector3 direction)
+
+        public void Throw()
         {
-            _rigidbody.AddForce(direction * _throwForce);
+            _rigidbody.AddForce(_direction * _throwForce);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -25,7 +27,7 @@ namespace Shooter.Gameplay
             {
                 enemy.TakeDamage(_damage);
             }
-            
+
             Destroy(gameObject);
         }
     }

@@ -1,52 +1,59 @@
 using System;
 using Scellecs.Morpeh;
-using Unity.IL2CPP.CompilerServices;
+using Shooter.Tools;
 
 namespace Shooter.Gameplay
 {
-    [Il2CppSetOption(Option.NullChecks, false)]
-    [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
-    [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public sealed class CharacterShootingSystem : ISystem
     {
-        private readonly IBulletFactory _bulletFactory;
         private readonly ICharacterShootingInput _input;
-        private readonly bool _isBurst;
-      
+        private readonly IWeaponry _weaponry;
+
         private Filter _filter;
 
-        public CharacterShootingSystem(IBulletFactory bulletFactory, ICharacterShootingInput input, bool isBurst)
+        public CharacterShootingSystem(ICharacterShootingInput input, IWeaponry weaponry)
         {
-            _bulletFactory = bulletFactory ?? throw new ArgumentNullException(nameof(bulletFactory));
             _input = input ?? throw new ArgumentNullException(nameof(input));
-            _isBurst = isBurst;
+            _weaponry = weaponry ?? throw new ArgumentNullException(nameof(weaponry));
         }
 
         public World World { get; set; }
 
         public void OnAwake()
         {
-            _filter = World.Filter.With<WeaponComponent>().With<DamageComponent>();
+            _filter = World.Filter.With<WeaponComponent>().With<DamageComponent>().With<WeaponTypeComponent>().With<ClipComponent>();
         }
 
         public void OnUpdate(float deltaTime)
         {
-            if (_isBurst && _input.IsShootingBurst)
-                Shoot();
-            
-            if(!_isBurst && _input.IsShooting)
-                Shoot();
+            TryShoot();
         }
 
-        private void Shoot()
+        private void TryShoot()
         {
             foreach (Entity entity in _filter)
             {
                 ref WeaponComponent weaponComponent = ref entity.GetComponent<WeaponComponent>();
                 ref DamageComponent damageComponent = ref entity.GetComponent<DamageComponent>();
+                ref ClipComponent clipComponent = ref entity.GetComponent<ClipComponent>();
+                ref WeaponTypeComponent typeComponent = ref entity.GetComponent<WeaponTypeComponent>();
+                
+                if (clipComponent.Bullets == 0 || clipComponent.IsReloading)
+                    return;
 
-                IBullet bullet = _bulletFactory.Create(damageComponent.Damage, weaponComponent.BulletSpawnPoint.position);
-                bullet.Throw(weaponComponent.BulletSpawnPoint.forward);
+                if (typeComponent.GeneralType.IsStandard() == false)
+                    return;
+                
+                if (weaponComponent.IsSelected == false)
+                    return;
+
+                if ((weaponComponent.IsBurst && _input.IsShootingBurst) || (!weaponComponent.IsBurst && _input.IsShooting))
+                {
+                    IBullet bullet = weaponComponent.BulletFactory.Create(damageComponent.Damage);
+                    bullet.Throw();
+                    clipComponent.Bullets--;
+                    _weaponry.Remove(bullets: 1, typeComponent.GeneralType);
+                }
             }
         }
 

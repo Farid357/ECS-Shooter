@@ -7,10 +7,9 @@ namespace Shooter.Gameplay
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct ClipComponent : IComponent
+    public struct WeaponTypeComponent : IComponent
     {
-        public bool IsReloading;
-        public int Bullets;
-        public int MaxBullets;
+        public GeneralWeaponType GeneralType;
+        public ConcreteWeaponType ConcreteType;
     }
 }

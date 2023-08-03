@@ -5,5 +5,7 @@ namespace Shooter.Gameplay
         bool IsShootingBurst { get; }
         
         bool IsShooting { get; }
+        
+        bool IsReloading { get; }
     }
 }

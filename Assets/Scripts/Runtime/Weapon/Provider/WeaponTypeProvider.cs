@@ -1,4 +1,4 @@
-using Scellecs.Morpeh;
+using Scellecs.Morpeh.Providers;
 using Unity.IL2CPP.CompilerServices;
 
 namespace Shooter.Gameplay
@@ -7,10 +7,8 @@ namespace Shooter.Gameplay
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct ClipComponent : IComponent
+    public class WeaponTypeProvider : MonoProvider<WeaponTypeComponent>
     {
-        public bool IsReloading;
-        public int Bullets;
-        public int MaxBullets;
+        
     }
 }

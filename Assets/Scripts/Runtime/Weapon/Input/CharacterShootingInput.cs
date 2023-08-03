@@ -7,6 +7,7 @@ namespace Shooter.Gameplay
         public bool IsShootingBurst => Mouse.current.leftButton.wasPressedThisFrame;
 
         public bool IsShooting => Mouse.current.leftButton.isPressed;
-
+        
+        public bool IsReloading => Keyboard.current.rKey.wasPressedThisFrame;
     }
 }
