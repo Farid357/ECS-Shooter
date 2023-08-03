@@ -20,8 +20,8 @@ namespace Shooter.Core
             BestScoreRecord bestScoreRecord = new BestScoreRecord(score);
             BestScoreRecordPresenter scoreRecordPresenter = new BestScoreRecordPresenter(bestScoreRecord, _recordView);
             
-            Container.BindInstance(score).AsSingle();
-            Container.BindInstance(wallet).AsSingle();
+            Container.Bind<IScore>().FromInstance(score).AsSingle();
+            Container.Bind<IWallet>().FromInstance(wallet).AsSingle();
             
             Container.BindInterfacesTo<ScorePresenter>().FromInstance(scorePresenter).AsSingle();
             Container.BindInterfacesTo<BestScoreRecord>().FromInstance(bestScoreRecord).AsSingle();

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5587426108530338810}
   - component: {fileID: 8133028847660128439}
   - component: {fileID: 7884080364308494717}
+  - component: {fileID: 2636749824997656123}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -112,6 +113,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b8b18c3c42f46529a46433f8da45788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
 --- !u!114 &7884080364308494717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,5 +134,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43f7fcfce288494e8c6226d3f687f930, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   serializedData:
-    Health: 30
+    Health: 60
+--- !u!54 &2636749824997656123
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5925523672262342408}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 32
+  m_CollisionDetection: 0

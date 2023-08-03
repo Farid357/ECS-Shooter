@@ -9,6 +9,7 @@ namespace Shooter.Core
     public class WeaponInstaller : MonoInstaller
     {
         [SerializeField] private WeaponFactory _weaponFactory;
+        [SerializeField] private ClipView _clipView;
         
         private IGameLoop _gameLoop;
 
@@ -23,9 +24,6 @@ namespace Shooter.Core
             IWeaponry weaponry = new Weaponry();
             ICharacterShootingInput shootingInput = new CharacterShootingInput();
 
-            Container.BindInstance(shootingInput).AsSingle();
-            Container.BindInstance(weaponry).AsSingle();
-            
             Entity entity = _weaponFactory.Create();
             ref WeaponComponent weaponComponent = ref entity.GetComponent<WeaponComponent>();
             ref WeaponTypeComponent typeComponent = ref entity.GetComponent<WeaponTypeComponent>();
@@ -34,11 +32,11 @@ namespace Shooter.Core
             weaponComponent.IsSelected = true;
             weaponry.Add(clipComponent.MaxBullets, typeComponent.GeneralType);
             
-            ISystem shootingSystem = Container.Instantiate<CharacterShootingSystem>();
-            ISystem reloadingSystem = Container.Instantiate<CharacterReloadingSystem>();
-            
-            _gameLoop.AddSystem(shootingSystem);
-            _gameLoop.AddSystem(reloadingSystem);
+            _gameLoop.AddSystem(new CharacterShootingSystem(shootingInput));
+            _gameLoop.AddSystem(new ClipViewSystem(_clipView, weaponry));
+            _gameLoop.AddSystem(new CharacterReloadingSystem(shootingInput, weaponry));
+            _gameLoop.AddSystem(new WeaponShootAnimationSystem());
+            _gameLoop.AddSystem(new CharacterShotsCleanup());
         }
     }
 }

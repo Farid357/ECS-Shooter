@@ -24,7 +24,7 @@ namespace Shooter.Gameplay
 
         public void OnAwake()
         {
-            _filter = World.Filter.With<ClipComponent>().With<AnimatorComponent>().With<WeaponTypeComponent>();
+            _filter = World.Filter.With<ClipComponent>().With<AnimatorComponent>().With<WeaponTypeComponent>().With<WeaponComponent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -34,8 +34,12 @@ namespace Shooter.Gameplay
                 ref ClipComponent clipComponent = ref entity.GetComponent<ClipComponent>();
                 ref AnimatorComponent animatorComponent = ref entity.GetComponent<AnimatorComponent>();
                 ref WeaponTypeComponent typeComponent = ref entity.GetComponent<WeaponTypeComponent>();
+                ref WeaponComponent weaponComponent = ref entity.GetComponent<WeaponComponent>();
                 int bulletsInWeaponry = _weaponry.GetBullets(typeComponent.GeneralType);
 
+                if (weaponComponent.IsSelected == false)
+                    continue;
+                
                 if (bulletsInWeaponry == 0)
                     return;
 
@@ -49,6 +53,7 @@ namespace Shooter.Gameplay
                         int reloadBullets = bulletsInWeaponry >= difference ? difference : bulletsInWeaponry;
 
                         clipComponent.Bullets += reloadBullets;
+                        clipComponent.IsReloading = false;
                         _weaponry.Remove(reloadBullets, typeComponent.GeneralType);
                     }
                 }

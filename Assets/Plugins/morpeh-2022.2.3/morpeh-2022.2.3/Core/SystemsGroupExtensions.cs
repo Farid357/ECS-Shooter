@@ -145,35 +145,24 @@ namespace Scellecs.Morpeh {
         [Conditional("MORPEH_DEBUG")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void TryCatchUpdate(this ISystem system, SystemsGroup systemsGroup, float deltaTime) {
-            try {
 #if MORPEH_PROFILING
                 using (new ProfilerSampler(system)) {
 #endif
                     system.OnUpdate(deltaTime);
 #if MORPEH_PROFILING
-                }
 #endif
-            }
-            catch (Exception exception) {
-                systemsGroup.SystemThrowException(system, exception);
             }
         }
 
         [Conditional("MORPEH_DEBUG")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void TryCatchAwake(this IInitializer initializer) {
-            try {
 #if MORPEH_PROFILING
                 using (new ProfilerSampler(initializer)) {
 #endif
                     initializer.OnAwake();
 #if MORPEH_PROFILING
-                }
 #endif
-            }
-            catch (Exception exception) {
-                MLogger.LogError($"Can not initialize {initializer.GetType()}");
-                MLogger.LogException(exception);
             }
         }
 

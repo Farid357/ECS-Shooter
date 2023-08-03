@@ -9,7 +9,7 @@ namespace Shooter.Gameplay
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct WeaponComponent : IComponent
     {
-        public IBulletFactory BulletFactory;
+        public BulletFactory BulletFactory;
         public bool IsBurst;
         public bool IsSelected;
     }

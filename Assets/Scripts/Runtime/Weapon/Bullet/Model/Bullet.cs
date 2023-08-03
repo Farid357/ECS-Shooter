@@ -18,7 +18,7 @@ namespace Shooter.Gameplay
 
         public void Throw()
         {
-            _rigidbody.AddForce(_direction * _throwForce);
+            _rigidbody.AddForce(_direction * _throwForce, ForceMode.Impulse);
         }
 
         private void OnTriggerEnter(Collider other)

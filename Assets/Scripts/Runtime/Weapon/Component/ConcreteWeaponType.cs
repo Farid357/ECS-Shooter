@@ -5,6 +5,10 @@ namespace Shooter.Gameplay
         Rpg,
         Ak47,
         Pistol,
-        EnergyAk47
+        EnergyAk47,
+        Shotgun,
+        SniperRiffle,
+        Riffle,
+        SG
     }
 }

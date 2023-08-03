@@ -1,11 +1,10 @@
-using System;
 using Scellecs.Morpeh;
 using UnityEngine;
 using Zenject;
 
 namespace Shooter.Core
 {
-    public class GameLoop : IGameLoop, IInitializable, ITickable, IFixedTickable, ILateTickable, IDisposable
+    public class GameLoop : IGameLoop, IInitializable, ITickable, IFixedTickable, ILateTickable
     {
         private readonly SystemsGroup _systemsGroup;
         
