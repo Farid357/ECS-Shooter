@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Shooter.Gameplay
 {
-    public class WeaponShootAnimationSystem : ISystem
+    public class WeaponShootingAnimationSystem : ISystem
     {
         private readonly int _shotId = Animator.StringToHash("Shot");
         
@@ -14,13 +14,18 @@ namespace Shooter.Gameplay
 
         public void OnAwake()
         {
-            _filter = World.Filter.With<CharacterShotComponent>();
+            _filter = World.Filter.With<CharacterShotComponent>().With<AnimatorComponent>();
         }
 
         public void OnUpdate(float deltaTime)
         {
             foreach (Entity entity in _filter)
             {
+                ref CharacterShotComponent shotComponent = ref entity.GetComponent<CharacterShotComponent>();
+
+                if (!shotComponent.HasThrewBullet)
+                    return;
+                
                 ref AnimatorComponent animatorComponent = ref entity.GetComponent<AnimatorComponent>();
                 animatorComponent.Animator.Play(_shotId);
             }

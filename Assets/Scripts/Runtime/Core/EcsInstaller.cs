@@ -5,22 +5,13 @@ namespace Shooter.Core
 {
     public class EcsInstaller : MonoInstaller
     {
-        private World _world;
-        private GameLoop _gameLoop;
-
         public override void InstallBindings()
         {
-            _world = World.Default;
-            _gameLoop = new GameLoop(_world);
+            World world = World.Default;
+            var gameLoop = new GameLoop(world);
             
-            Container.BindInstance(_world).AsSingle();
-            Container.BindInterfacesAndSelfTo<GameLoop>().FromInstance(_gameLoop).AsSingle();
-        }
-
-        private void OnDestroy()
-        {
-            _gameLoop.Dispose();
-            _world.Dispose();
+            Container.BindInstance(world).AsSingle();
+            Container.BindInterfacesAndSelfTo<GameLoop>().FromInstance(gameLoop).AsSingle();
         }
     }
 }

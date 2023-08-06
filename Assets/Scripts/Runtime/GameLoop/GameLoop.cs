@@ -1,3 +1,4 @@
+using System;
 using Scellecs.Morpeh;
 using UnityEngine;
 using Zenject;
@@ -7,10 +8,12 @@ namespace Shooter.Core
     public class GameLoop : IGameLoop, IInitializable, ITickable, IFixedTickable, ILateTickable
     {
         private readonly SystemsGroup _systemsGroup;
-        
+        private readonly World _world;
+
         public GameLoop(World world)
         {
-            _systemsGroup = world.CreateSystemsGroup();
+            _world = world ?? throw new ArgumentNullException(nameof(world));
+            _systemsGroup = _world.CreateSystemsGroup();
         }
 
         public void AddInitializer(IInitializer initializer)
@@ -46,6 +49,7 @@ namespace Shooter.Core
         public void Dispose()
         {
             _systemsGroup.Dispose();
+            _world.Dispose();
         }
     }
 }

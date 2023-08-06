@@ -952,6 +952,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponFactory: {fileID: 768530454}
   _clipView: {fileID: 288068014}
+  _personController: {fileID: 135756641613574981}
 --- !u!1 &874605735
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,7 +1646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4960c6bf62514c8e878ec4c9cecf4776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemy: {fileID: 8133028847660128439, guid: abac4d83d8b127840b3e0e1e42b44f29, type: 3}
+  _enemy: {fileID: 6885775605264027197, guid: abac4d83d8b127840b3e0e1e42b44f29, type: 3}
   _spawnPoints:
   - {fileID: 1467478953}
   - {fileID: 320049739}
@@ -1721,7 +1722,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595068399}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.01, y: -0.37, z: 0.23}
+  m_LocalPosition: {x: 0.01, y: -0.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2108,6 +2109,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5393215579111688471}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &135756641613574981 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
+    type: 3}
+  m_PrefabInstance: {fileID: 5393215579111688471}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55919ac34a26952479f3fc91f777b2fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2114283753834967212
 GameObject:
   m_ObjectHideFlags: 0

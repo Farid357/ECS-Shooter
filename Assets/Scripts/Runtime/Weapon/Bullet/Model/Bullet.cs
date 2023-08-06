@@ -1,3 +1,4 @@
+using Scellecs.Morpeh;
 using UnityEngine;
 
 namespace Shooter.Gameplay
@@ -23,9 +24,10 @@ namespace Shooter.Gameplay
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out IEnemy enemy))
+            if (other.TryGetComponent(out HealthProvider healthProvider))
             {
-                enemy.TakeDamage(_damage);
+               ref HealthComponent healthComponent = ref healthProvider.Entity.GetComponent<HealthComponent>();
+               healthComponent.Health -= _damage;
             }
 
             Destroy(gameObject);

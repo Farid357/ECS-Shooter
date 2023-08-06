@@ -38,16 +38,21 @@ namespace Shooter.Gameplay
 
                 if (weaponComponent.IsSelected == false || typeComponent.GeneralType.IsStandard() == false)
                     continue;
-                
-                if (clipComponent.Bullets == 0 || clipComponent.IsReloading)
+
+                if (clipComponent.IsReloading)
                     return;
 
                 if ((weaponComponent.IsBurst && _input.IsShootingBurst) || (!weaponComponent.IsBurst && _input.IsShooting))
                 {
-                    IBullet bullet = weaponComponent.BulletFactory.Create(damageComponent.Damage);
-                    bullet.Throw();
-                    clipComponent.Bullets--;
-                    entity.AddComponent<CharacterShotComponent>();
+                    ref CharacterShotComponent shotComponent = ref entity.AddComponent<CharacterShotComponent>();
+                   
+                    if (clipComponent.Bullets > 0)
+                    {
+                        IBullet bullet = weaponComponent.BulletFactory.Create(damageComponent.Damage);
+                        bullet.Throw();
+                        clipComponent.Bullets--;
+                        shotComponent.HasThrewBullet = true;
+                    }
                 }
             }
         }

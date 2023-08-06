@@ -58,11 +58,11 @@ namespace Shooter.Gameplay
                     }
                 }
 
-                if ((clipComponent.Bullets == 0 && _shootingInput.IsShooting) || _shootingInput.IsReloading)
+                else if ((entity.Has<CharacterShotComponent>() && !entity.GetComponent<CharacterShotComponent>().HasThrewBullet) || (_shootingInput.IsReloading && clipComponent.MaxBullets > clipComponent.Bullets))
                 {
                     clipComponent.IsReloading = true;
                     animatorComponent.Animator.Play(_recharge);
-                    _playAnimationSeconds = animatorComponent.Animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+                    _playAnimationSeconds = animatorComponent.Animator.GetCurrentAnimatorStateInfo(0).length / 2f;
                 }
             }
         }

@@ -54,6 +54,8 @@ namespace StarterAssets
 		// cinemachine
 		private float _cinemachineTargetPitch;
 
+		public bool IsSprinting => _input.sprint;
+		
 		// player
 		private float _speed;
 		private float _rotationVelocity;

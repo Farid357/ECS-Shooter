@@ -1,6 +1,7 @@
 using System;
 using Scellecs.Morpeh;
 using Shooter.Gameplay;
+using StarterAssets;
 using UnityEngine;
 using Zenject;
 
@@ -10,6 +11,7 @@ namespace Shooter.Core
     {
         [SerializeField] private WeaponFactory _weaponFactory;
         [SerializeField] private ClipView _clipView;
+        [SerializeField] private FirstPersonController _personController;
         
         private IGameLoop _gameLoop;
 
@@ -30,12 +32,13 @@ namespace Shooter.Core
             ref ClipComponent clipComponent = ref entity.GetComponent<ClipComponent>();
             
             weaponComponent.IsSelected = true;
-            weaponry.Add(clipComponent.MaxBullets, typeComponent.GeneralType);
+            weaponry.Add(clipComponent.MaxBullets * 4, typeComponent.GeneralType);
             
             _gameLoop.AddSystem(new CharacterShootingSystem(shootingInput));
             _gameLoop.AddSystem(new ClipViewSystem(_clipView, weaponry));
             _gameLoop.AddSystem(new CharacterReloadingSystem(shootingInput, weaponry));
-            _gameLoop.AddSystem(new WeaponShootAnimationSystem());
+            _gameLoop.AddSystem(new WeaponShootingAnimationSystem());
+            _gameLoop.AddSystem(new WeaponMoveAnimationSystem(_personController, shootingInput));
             _gameLoop.AddSystem(new CharacterShotsCleanup());
         }
     }
