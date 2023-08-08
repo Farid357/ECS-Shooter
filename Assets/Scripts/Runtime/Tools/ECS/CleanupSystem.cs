@@ -1,9 +1,9 @@
 using System.Linq;
 using Scellecs.Morpeh;
 
-namespace Shooter.Gameplay
+namespace Shooter.Tools
 {
-    public class CharacterShotsCleanup : ILateSystem
+    public class CleanupSystem<T> : ILateSystem where T : struct, IComponent
     {
         private Filter _filter;
 
@@ -11,14 +11,14 @@ namespace Shooter.Gameplay
 
         public void OnAwake()
         {
-            _filter = World.Filter.With<CharacterShotComponent>();
+            _filter = World.Filter.With<T>();
         }
 
         public void OnUpdate(float deltaTime)
         {
             for (int i = 0; i < _filter.Count(); i++)
             {
-                _filter.ElementAt(i).RemoveComponent<CharacterShotComponent>();
+                _filter.ElementAt(i).RemoveComponent<T>();
             }
         }
 

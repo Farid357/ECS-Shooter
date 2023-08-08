@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.bananaparty.behaviortree": "https://github.com/forcepusher/com.bananaparty.behaviortree.git#5.0.0",
     "com.unity.cinemachine": "2.8.9",
     "com.unity.collab-proxy": "1.17.7",
     "com.unity.feature.development": "1.0.1",

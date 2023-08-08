@@ -32,7 +32,10 @@ namespace Shooter.Gameplay
         private void OnChanged(int score)
         {
             if (_record.Value < score)
+            {
                 _record.Value = score;
+                _recordStorage.Save(_record.Value);
+            }
         }
         
         public void Dispose()

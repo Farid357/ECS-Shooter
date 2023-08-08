@@ -1116,6 +1116,7 @@ GameObject:
   - component: {fileID: 2629829463226880224}
   - component: {fileID: 3717098257994048915}
   - component: {fileID: 931146805973738621}
+  - component: {fileID: 7371572373125703304}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -1305,6 +1306,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 2755999992106188316, guid: 663e208b69662204b81a0e7c76878619, type: 3}
   _spawnPoint: {fileID: 7475165396248415101}
+--- !u!114 &7371572373125703304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409424844601486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f90323b400304714b8720c15e060ef60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  serializedData:
+    RateInSeconds: 0.4
 --- !u!1 &1416144876138884
 GameObject:
   m_ObjectHideFlags: 0

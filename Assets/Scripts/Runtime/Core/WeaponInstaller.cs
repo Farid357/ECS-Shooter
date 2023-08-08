@@ -1,6 +1,7 @@
 using System;
 using Scellecs.Morpeh;
 using Shooter.Gameplay;
+using Shooter.Tools;
 using StarterAssets;
 using UnityEngine;
 using Zenject;
@@ -36,10 +37,13 @@ namespace Shooter.Core
             
             _gameLoop.AddSystem(new CharacterShootingSystem(shootingInput));
             _gameLoop.AddSystem(new ClipViewSystem(_clipView, weaponry));
+            
+            _gameLoop.AddSystem(new WeaponRateSystem());
             _gameLoop.AddSystem(new CharacterReloadingSystem(shootingInput, weaponry));
             _gameLoop.AddSystem(new WeaponShootingAnimationSystem());
             _gameLoop.AddSystem(new WeaponMoveAnimationSystem(_personController, shootingInput));
-            _gameLoop.AddSystem(new CharacterShotsCleanup());
+         
+            _gameLoop.AddSystem(new CleanupSystem<CharacterShotComponent>());
         }
     }
 }

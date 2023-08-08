@@ -19,15 +19,10 @@ namespace Shooter.Gameplay
 
         public void OnAwake()
         {
-            _filter = World.Filter.With<WeaponComponent>().With<DamageComponent>().With<WeaponTypeComponent>().With<ClipComponent>();
+            _filter = World.Filter.With<WeaponComponent>().With<DamageComponent>().With<WeaponTypeComponent>().With<ClipComponent>().Without<WeaponRateBlockComponent>();
         }
 
         public void OnUpdate(float deltaTime)
-        {
-            TryShoot();
-        }
-
-        private void TryShoot()
         {
             foreach (Entity entity in _filter)
             {

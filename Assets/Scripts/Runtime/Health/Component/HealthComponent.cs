@@ -10,5 +10,6 @@ namespace Shooter.Gameplay
     public struct HealthComponent : IComponent
     {
         public int Health;
+        public int MaxHealth;
     }
 }
