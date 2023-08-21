@@ -1,4 +1,5 @@
-using Scellecs.Morpeh;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -6,14 +7,19 @@ namespace Shooter.Gameplay
 {
     public class EnemyFactory : MonoBehaviour
     {
-        [SerializeField] private EnemyProvider _enemy;
+        [SerializeField] private EnemyProvider _enemyPrefab;
         [SerializeField] private Transform[] _spawnPoints;
         
-        public Entity Create()
+        public void Create(int count)
         {
-            Vector3 position = _spawnPoints[Random.Range(0, _spawnPoints.Length)].position;
-            EnemyProvider enemy = Instantiate(_enemy, position, Quaternion.identity);
-            return enemy.Entity;
+            List<Transform> spawnPoints = _spawnPoints.ToList();
+            
+            for (int i = 0; i < count; i++)
+            {
+                Transform randomSpawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
+                EnemyProvider enemy = Instantiate(_enemyPrefab, randomSpawnPoint.position, Quaternion.identity);
+                spawnPoints.Remove(randomSpawnPoint);
+            }
         }
     }
 }
