@@ -11,23 +11,27 @@ namespace Shooter.Gameplay
         [SerializeField] private float _distanceToStopMovement = 1.5f;
         [SerializeField] private int _attackDamage = 10;
         [SerializeField] private string[] _attackAnimations;
+        [SerializeField] private string _isWalkingAnimatorBoolName;
 
         protected override IBehaviorNode CreateBehavior()
         {
             ICharacterSearcher characterSearcher = new CharacterSearcher(transform, _distanceToBeNearCharacter);
 
-            return new SequenceNode(new IBehaviorNode[]
+            return new RepeatNode(new SequenceNode(new IBehaviorNode[]
             {
-              //  new WaitNode(2000),
-                new RepeatNode(new SequenceNode(new IBehaviorNode[]
+                new IsCharacterNearNode(characterSearcher),
+                new MoveToCharacterNode(characterSearcher, _movement, _distanceToStopMovement),
+
+                new SequenceNode(new IBehaviorNode[]
                 {
-                    new IsCharacterNearNode(characterSearcher),
-                    new MoveToCharacterNode(characterSearcher, _movement, _distanceToStopMovement),
+                    new SetAnimatorBoolNode(_animator, _isWalkingAnimatorBoolName, false),
                     new PlayRandomAnimationNode(_animator, _attackAnimations),
-                    new AttackNode(characterSearcher, _attackDamage),
-                    new WaitNode(1500)
-                })),
-            });
+                    new SetAnimatorBoolNode(_animator, _isWalkingAnimatorBoolName, true),
+                }),
+                
+                new AttackNode(characterSearcher, _attackDamage),
+                new WaitNode(1500)
+            }));
         }
     }
 }

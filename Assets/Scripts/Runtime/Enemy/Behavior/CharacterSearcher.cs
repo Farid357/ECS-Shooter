@@ -22,11 +22,12 @@ namespace Shooter.Gameplay
 
         public void Search()
         {
+            SearchedCharacter = null;
             int size = Physics.OverlapSphereNonAlloc(_transform.position, _distanceToBeNear, _results);
-
+        
             for (int i = 0; i < size; i++)
             {
-                if (_results[i].TryGetComponent(out ICharacter character))
+                if (_results[i].gameObject.activeInHierarchy && _results[i].TryGetComponent(out ICharacter character))
                     SearchedCharacter = character;
             }
         }

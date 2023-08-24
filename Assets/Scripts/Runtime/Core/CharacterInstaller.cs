@@ -8,6 +8,7 @@ namespace Shooter.Core
     public class CharacterInstaller : MonoInstaller
     {
         [SerializeField] private CharacterHealthView _healthView;
+        [SerializeField] private Character _character;
         
         private IGameLoop _gameLoop;
 
@@ -19,6 +20,7 @@ namespace Shooter.Core
         
         public override void InstallBindings()
         {
+            Container.BindInterfacesAndSelfTo<GamePause>().FromInstance(new GamePause(_character)).AsSingle();
             _gameLoop.AddSystem(new CharacterHealthViewSystem(_healthView));
         }
     }

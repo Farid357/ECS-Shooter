@@ -1,4 +1,5 @@
 using Scellecs.Morpeh;
+using UniRx;
 using UnityEngine;
 
 namespace Shooter.Gameplay
@@ -8,5 +9,7 @@ namespace Shooter.Gameplay
         Entity Entity { get; }
         
         Vector3 Position { get; }
+       
+        IReadOnlyReactiveProperty<bool> IsAlive { get; }
     }
 }

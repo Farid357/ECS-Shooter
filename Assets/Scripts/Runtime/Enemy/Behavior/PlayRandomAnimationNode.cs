@@ -11,6 +11,8 @@ namespace Shooter.Gameplay
         private readonly Animator _animator;
         private readonly Random _random;
         private readonly int[] _animationsId;
+
+        private float _time = -1;
         
         public PlayRandomAnimationNode(Animator animator, IReadOnlyList<string> animations)
         {
@@ -26,10 +28,18 @@ namespace Shooter.Gameplay
 
         public override BehaviorNodeStatus OnExecute(long time)
         {
+            if (_time > 0)
+            {
+                _time -= Time.deltaTime;
+                return _time <= 0 ? BehaviorNodeStatus.Success : BehaviorNodeStatus.Failure;
+            }
+            
             int randomIndex = _random.Next(0, _animationsId.Length);
             int randomAnimationId = _animationsId[randomIndex];
+           
             _animator.Play(randomAnimationId);
-            return BehaviorNodeStatus.Success;
+            _time = _animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+            return BehaviorNodeStatus.Failure;
         }
     }
 }

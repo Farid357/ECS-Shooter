@@ -16,7 +16,7 @@ namespace Shooter.Gameplay
             
             for (int i = 0; i < count; i++)
             {
-                Transform randomSpawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
+                Transform randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
                 EnemyProvider enemy = Instantiate(_enemyPrefab, randomSpawnPoint.position, Quaternion.identity);
                 spawnPoints.Remove(randomSpawnPoint);
             }

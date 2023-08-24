@@ -2064,6 +2064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthView: {fileID: 1040429705}
+  _character: {fileID: 135756641613574984}
 --- !u!4 &1509139489
 Transform:
   m_ObjectHideFlags: 0

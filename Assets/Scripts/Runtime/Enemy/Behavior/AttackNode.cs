@@ -24,6 +24,10 @@ namespace Shooter.Gameplay
 
             ICharacter character = _characterSearcher.SearchedCharacter;
             ref HealthComponent healthComponent = ref character.Entity.GetComponent<HealthComponent>();
+            
+            if (healthComponent.Health <= 0)
+                return BehaviorNodeStatus.Failure;
+            
             healthComponent.Health -= _damage;
             return BehaviorNodeStatus.Success;
         }
