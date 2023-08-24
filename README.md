@@ -4,7 +4,7 @@
 ![badge](https://img.shields.io/static/v1?label=Platform&message=PC&color=darkred&style=for-the-badge)
 
 # Overview
-Small Shooter to learn **ECS** approach.
+Small Shooter for deep learning **ECS** approach.
 
 ![Image](https://github.com/Farid357/ECS-Shooter/assets/104379303/77337de2-3ef2-4d6e-9cda-a40929fd49c7)
 
